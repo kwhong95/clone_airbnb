@@ -10,8 +10,9 @@ import { dayList, monthList, yearList } from "lib/staticDate";
 import palette from "styles/palette";
 import Selector from "components/common/Selector";
 import Button from "components/common/Button";
+import { signupAPI } from "lib/api/auth";
 
-const Container = styled.div`
+const Container = styled.form`
   width: 568px;
   padding: 32px;
   background-color: white;
@@ -114,8 +115,28 @@ const SignUpModal = () => {
     setBirthYear(event.target.value);
   };
 
+  //* 회원가입 폼 제출하기
+  const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const signUpBody = {
+        email,
+        lastname,
+        firstname,
+        password,
+        birthday: new Date(
+          `${birthYear}-${birthMonth!.replace("월", "")}-${birthDay}`
+        ).toISOString(),
+      };
+      await signupAPI(signUpBody);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
-    <Container>
+    <Container onSubmit={onSubmitSignUp}>
       <CloseXIcon className="modal-close-x-icon" />
       <div className="input-wrapper">
         <Input
