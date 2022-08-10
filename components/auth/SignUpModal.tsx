@@ -16,6 +16,7 @@ import MailIcon from "../../public/static/svg/auth/mail.svg";
 import PersonIcon from "../../public/static/svg/auth/person.svg";
 import OpenedEyeIcon from "../../public/static/svg/auth/opened_eye.svg";
 import ClosedEyeIcon from "../../public/static/svg/auth/closed_eye.svg";
+import useValidateMode from "hooks/useValidateMode";
 
 const Container = styled.form`
   width: 568px;
@@ -81,6 +82,7 @@ const SignUpModal = () => {
   const [birthMonth, setBirthMonth] = useState<string | undefined>();
 
   const dispatch = useDispatch();
+  const { setValidateMode } = useValidateMode();
 
   //* 비밀번호 숨김 토글하기
   const toggleHidePassword = () => {
@@ -125,6 +127,13 @@ const SignUpModal = () => {
   //* 회원가입 폼 제출하기
   const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    setValidateMode(true);
+
+    if (!email || !lastname || !firstname || !password) {
+      return undefined;
+    }
+
     try {
       const signUpBody = {
         email,
@@ -154,6 +163,9 @@ const SignUpModal = () => {
           name="email"
           value={email}
           onChange={onChangeEmail}
+          useValidation
+          isVaild={!!email}
+          errorMessage="이메일이 필요합니다."
         />
       </div>
       <div className="input-wrapper">
@@ -162,6 +174,9 @@ const SignUpModal = () => {
           icon={<PersonIcon />}
           value={lastname}
           onChange={onChangeLastname}
+          useValidation
+          isVaild={!!lastname}
+          errorMessage="이름을 입력하세요."
         />
       </div>
       <div className="input-wrapper">
@@ -170,6 +185,9 @@ const SignUpModal = () => {
           icon={<PersonIcon />}
           value={firstname}
           onChange={onChangeFirstname}
+          useValidation
+          isVaild={!!firstname}
+          errorMessage="성을 입력하세요."
         />
       </div>
       <div className="input-wrapper">
@@ -185,6 +203,9 @@ const SignUpModal = () => {
           }
           value={password}
           onChange={onChangePassword}
+          useValidation
+          isVaild={!!password}
+          errorMessage="비밀번호를 입력하세요"
         />
       </div>
       <p className="sign-up-birthday-label">생일</p>
