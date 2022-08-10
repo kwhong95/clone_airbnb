@@ -1,6 +1,6 @@
 import reset from "styled-reset";
 import { createGlobalStyle, css } from "styled-components";
-import paltette from "./paltette";
+import paltette from "./palette";
 
 const globalStyle = css`
   ${reset};

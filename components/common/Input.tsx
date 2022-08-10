@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import paltette from "styles/paltette";
+import paltette from "styles/palette";
 
 const Container = styled.div<{ iconExist: boolean }>`
   input {

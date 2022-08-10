@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg";
 import AirbnbLogoTextIcon from "../public/static/svg/logo/logo_text.svg";
-import paltette from "../styles/paltette";
+import paltette from "../styles/palette";
 import SignUpModal from "./auth/SignUpModal";
 import useModal from "../hooks/useModal";
 
