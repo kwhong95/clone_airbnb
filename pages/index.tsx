@@ -1,3 +1,4 @@
+import Header from "components/Header";
 import React from "react";
 import styled from "styled-components";
 
@@ -7,7 +8,7 @@ const Container = styled.div`
 `;
 
 const index: React.FC = () => {
-  return <Container>hello world, air bnb</Container>;
+  return <Container>Hi</Container>;
 };
 
 export default index;

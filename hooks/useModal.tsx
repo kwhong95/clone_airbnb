@@ -5,13 +5,14 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 11;
+
   .modal-background {
     position: absolute;
     width: 100%;
@@ -50,13 +51,12 @@ const useModal = () => {
     if (ref.current && mounted && modalOpened) {
       return createPortal(
         <Container>
+          {children}
           <div
             className="modal-background"
             role="presentation"
             onClick={closeModal}
-          >
-            {children}
-          </div>
+          />
         </Container>,
         ref.current
       );
