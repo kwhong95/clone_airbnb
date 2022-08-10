@@ -1,18 +1,21 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es6: true,
   },
   extends: [
-    "plugin:react/recommended",
     "airbnb",
   ],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
+  },
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: "latest",
+    ecmaVersion: 2018,
     sourceType: "module",
   },
   plugins: [
@@ -30,7 +33,7 @@ module.exports = {
     "comma-dangle": "off", // 마지막에 , 을 넣지 않음
     "arrow-body-style": "off", // 화살표 함수 안에 return을 사용 가능
     "react/no-unescaped-entities": "off", // 문자열 내에서 " ' > } 허용
-    "react/props-types": "off", // props-types 사용 X
+    "react/prop-types": "off", // props-types 사용 X
     "object-curly-newline": "off", // { 다음 줄 바꿈을 강제 사용 X
     "react/jsx-one-expression-per-line": "off", // 한 라인에 여러 개의 JSX를 사용 가능
     "implicit-arrow-linebreak": "off", // 연산자 다음 줄 바꿈을 사용 가능
@@ -40,6 +43,7 @@ module.exports = {
     "react/jsx-props-no-spreading": "off", // props를 스프레드 가능
     "jsx-a11y/anchor-is-vaild": "off", // nextjs 에서는 a에 href 없이 사용
     "global-require": "off", // 함수 내에서 require 사용 가능
+    "react/function-component-definition": true,
     "react/jsx-filename-extension": [
       1,
       { extensions: [".js", ".jsx", ".tsx"] }, // jsx 사용 가능한 확장자 설정
