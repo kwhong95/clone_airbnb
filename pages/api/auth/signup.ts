@@ -49,14 +49,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       const token = jwt.sign(String(newUser.id), process.env.JWT_SECRET!);
       res.setHeader(
         "Set-Cookie",
-        `access_token=${token}; path=/; expires=${new Date(
-          Date.now() + 60 * 60 * 24 * 1000 * 3 // 3day
-        )}; httponly`
+        `access_token=${token}; Path=/; Expires=${new Date(
+          Date.now() + 60 * 60 * 24 * 1000 * 3 //3일
+        ).toUTCString()}; HttpOnly`
       );
       resolve(token);
     });
 
-    return res.end();
+    //* ! password는 보안상 전달하지 않도록 설정
+    const newUserWithoutPassword: Partial<Pick<StoredUserType, "password">> =
+      newUser;
+    delete newUserWithoutPassword.password;
+    res.statusCode = 200;
+    return res.send(newUser);
   }
   res.statusCode = 405;
 

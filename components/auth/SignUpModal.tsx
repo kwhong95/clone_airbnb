@@ -1,16 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import CloseXIcon from "../../public/static/svg/modal/modal_close_x_icon.svg";
-import MailIcon from "../../public/static/svg/auth/mail.svg";
-import PersonIcon from "../../public/static/svg/auth/person.svg";
-import OpenedEyeIcon from "../../public/static/svg/auth/opened_eye.svg";
-import ClosedEyeIcon from "../../public/static/svg/auth/closed_eye.svg";
+
 import Input from "components/common/Input";
 import { dayList, monthList, yearList } from "lib/staticDate";
 import palette from "styles/palette";
 import Selector from "components/common/Selector";
 import Button from "components/common/Button";
 import { signupAPI } from "lib/api/auth";
+import { userActions } from "store/user";
+
+/* Icons */
+import CloseXIcon from "../../public/static/svg/modal/modal_close_x_icon.svg";
+import MailIcon from "../../public/static/svg/auth/mail.svg";
+import PersonIcon from "../../public/static/svg/auth/person.svg";
+import OpenedEyeIcon from "../../public/static/svg/auth/opened_eye.svg";
+import ClosedEyeIcon from "../../public/static/svg/auth/closed_eye.svg";
 
 const Container = styled.form`
   width: 568px;
@@ -75,6 +80,8 @@ const SignUpModal = () => {
   const [birthDay, setBirthDay] = useState<string | undefined>();
   const [birthMonth, setBirthMonth] = useState<string | undefined>();
 
+  const dispatch = useDispatch();
+
   //* 비밀번호 숨김 토글하기
   const toggleHidePassword = () => {
     setHidePassword(!hidePassword);
@@ -118,7 +125,6 @@ const SignUpModal = () => {
   //* 회원가입 폼 제출하기
   const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     try {
       const signUpBody = {
         email,
@@ -129,9 +135,11 @@ const SignUpModal = () => {
           `${birthYear}-${birthMonth!.replace("월", "")}-${birthDay}`
         ).toISOString(),
       };
-      await signupAPI(signUpBody);
-    } catch (e) {
-      console.log(e);
+      const { data } = await signupAPI(signUpBody);
+
+      dispatch(userActions.setLoggedUser(data));
+    } catch (e: any) {
+      console.log(e.response.data);
     }
   };
 
