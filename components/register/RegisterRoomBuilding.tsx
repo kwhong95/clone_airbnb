@@ -30,6 +30,10 @@ const Container = styled.div`
     max-width: 485px;
     margin-bottom: 50px;
   }
+
+  .register-room-is-setup-for-guest-radio {
+    margin-bottom: 50px;
+  }
 `;
 
 // * 선택 불가능한 큰 범위 건물 유형
@@ -57,11 +61,27 @@ const roomTypeRadioOptions = [
   },
 ];
 
+//* 게스트만 사용하도록 만들어진 숙소인지 라디오 options
+const isSetUpForGuestOptions = [
+  {
+    label: "예, 게스트용으로 따로 마련된 숙소입니다.",
+    value: true,
+  },
+  {
+    label: "아니요, 제 개인 물건이 숙소에 있습니다.",
+    value: false,
+  },
+];
+
 const RegisterRoomBuilding: React.FC = () => {
   const largeBuildingType = useSelector(
     (state) => state.registerRoom.largeBuildingType
   );
   const buildingType = useSelector((state) => state.registerRoom.buildingType);
+  const roomType = useSelector((state) => state.registerRoom.roomType);
+  const isSetUpForGuest = useSelector(
+    (state) => state.registerRoom.isSetUpForGuest
+  );
 
   const dispatch = useDispatch();
 
@@ -129,6 +149,16 @@ const RegisterRoomBuilding: React.FC = () => {
     }
   }, [largeBuildingType]);
 
+  //* 숙소 유형 변경 시
+  const onChangeRoomType = (value: any) => {
+    dispatch(registerRoomActions.setRoomType(value));
+  };
+
+  //* 게스트용 숙소인지 변경 시;
+  const onChangeIsSetUpForGuest = (value: any) => {
+    dispatch(registerRoomActions.setIsSetUpForGuest(value));
+  };
+
   return (
     <Container>
       <h2>등록할 숙소의 종류는 무엇인가요?</h2>
@@ -147,21 +177,34 @@ const RegisterRoomBuilding: React.FC = () => {
       <div className="register-room-building-selector-wrapper">
         <Selector
           type="register"
-          value={undefined}
-          disabled={!largeBuildingType}
-          label="건물 유형을 선택하세요."
-          options={detailBuildingOptions}
+          value={buildingType || undefined}
           onChange={onChangeBuildingType}
+          disabled={!largeBuildingType}
+          options={detailBuildingOptions}
+          label="건물 유형을 선택하세요."
         />
       </div>
       {buildingType && (
-        <div className="register-room-room-type-radio">
-          <RadioGroup
-            label="게스트가 묵게 될 숙소 유형을 골라주세요."
-            value={undefined}
-            options={roomTypeRadioOptions}
-          />
-        </div>
+        <>
+          <div className="register-room-room-type-radio">
+            <RadioGroup
+              label="게스트가 묵게 될 숙소 유형을 골라주세요."
+              value={roomType}
+              options={roomTypeRadioOptions}
+              onChange={onChangeRoomType}
+              isValid={!!roomType}
+            />
+          </div>
+          <div className="register-room-is-setup-for-guest-radio">
+            <RadioGroup
+              label="게스트만 사용하도록 만들어진 숙소인가요?"
+              value={isSetUpForGuest}
+              options={isSetUpForGuestOptions}
+              onChange={onChangeIsSetUpForGuest}
+              isValid={!!isSetUpForGuest}
+            />
+          </div>
+        </>
       )}
     </Container>
   );

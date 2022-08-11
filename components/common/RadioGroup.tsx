@@ -60,6 +60,10 @@ const Container = styled.div<{ isValid: boolean; validateMode: boolean }>`
       return undefined;
     }}
   }
+  input[type="radio"]:checked {
+    background-color: ${palette.dark_cyan};
+    border: 0;
+  }
   input[type="radio"]:checked:after {
     content: "";
     width: 6px;
@@ -114,6 +118,8 @@ const RadioGroup: React.FC<IProps> = ({
   errorMessage = "옵션을 선택하세요.",
 }) => {
   const validateMode = useSelector((state) => state.common.validateMode);
+
+  console.log(value);
 
   return (
     <Container isValid={!!isValid} validateMode={validateMode}>
