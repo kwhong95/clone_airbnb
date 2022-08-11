@@ -6,6 +6,7 @@ import { largeBuildingTypeList } from "lib/staticDate";
 import palette from "styles/palette";
 import { useDispatch } from "react-redux";
 import { registerRoomActions } from "store/registerRoom";
+import RadioGroup from "components/common/RadioGroup";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -24,10 +25,37 @@ const Container = styled.div`
     width: 320px;
     margin-bottom: 32px;
   }
+
+  .register-room-room-type-radio {
+    max-width: 485px;
+    margin-bottom: 50px;
+  }
 `;
 
 // * 선택 불가능한 큰 범위 건물 유형
 const disabledlargeBuildingTypeOptions = ["하나를 선택해주세요."];
+
+//* 숙소 유형 radio options
+const roomTypeRadioOptions = [
+  {
+    label: "집 전체",
+    value: "entire",
+    description:
+      "게스트가 숙소 전체를 다른 사람과 공유하지 않고 단독으로 이용합니다. 일반적으로 침실, 욕실, 부엌이 포합됩니다.",
+  },
+  {
+    label: "개인실",
+    value: "private",
+    description:
+      "게스트에게 개인 침실이 제공됩니다. 침실 이외의 공간은 공용일 수 있습니다.",
+  },
+  {
+    label: "다인실",
+    value: "public",
+    description:
+      "게스트는 개인 공간 없이, 다른 사람과 함께 쓰는 침실이나 공용공간에서 숙박합니다.",
+  },
+];
 
 const RegisterRoomBuilding: React.FC = () => {
   const largeBuildingType = useSelector(
@@ -126,6 +154,15 @@ const RegisterRoomBuilding: React.FC = () => {
           onChange={onChangeBuildingType}
         />
       </div>
+      {buildingType && (
+        <div className="register-room-room-type-radio">
+          <RadioGroup
+            label="게스트가 묵게 될 숙소 유형을 골라주세요."
+            value={undefined}
+            options={roomTypeRadioOptions}
+          />
+        </div>
+      )}
     </Container>
   );
 };
