@@ -7,6 +7,7 @@ import palette from "styles/palette";
 import { useDispatch } from "react-redux";
 import { registerRoomActions } from "store/registerRoom";
 import RadioGroup from "components/common/RadioGroup";
+import RegisterRoomFooter from "./RegisterRoomFooter";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -206,6 +207,11 @@ const RegisterRoomBuilding: React.FC = () => {
           </div>
         </>
       )}
+      <RegisterRoomFooter
+        isValid={false}
+        prevHref="/"
+        nextHref="/room/register/bedrooms"
+      />
     </Container>
   );
 };

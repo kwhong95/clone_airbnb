@@ -119,8 +119,6 @@ const RadioGroup: React.FC<IProps> = ({
 }) => {
   const validateMode = useSelector((state) => state.common.validateMode);
 
-  console.log(value);
-
   return (
     <Container isValid={!!isValid} validateMode={validateMode}>
       <p className="radio-label">{label}</p>
