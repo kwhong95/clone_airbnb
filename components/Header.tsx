@@ -12,6 +12,8 @@ import AuthModal from "./auth/AuthModal";
 import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg";
 import AirbnbLogoTextIcon from "../public/static/svg/logo/logo_text.svg";
 import HambugerIcon from "../public/static/svg/header/hambuger.svg";
+import { logoutAPI } from "lib/api/auth";
+import { userActions } from "store/user";
 
 const Container = styled.div`
   position: sticky;
@@ -127,6 +129,16 @@ const Header: React.FC = () => {
   //* 유저 메뉴 열고, 닫힘 여부
   const [isUsermenuOpened, setIsUsermenuOpened] = useState(false);
 
+  //* 로그아웃 하기
+  const logout = async () => {
+    try {
+      await logoutAPI();
+      dispatch(userActions.initUser());
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <Container>
       <Link href="/">
@@ -182,18 +194,9 @@ const Header: React.FC = () => {
           {isUsermenuOpened && (
             <ul className="header-usermenu">
               <li>숙소 관리</li>
-              <li>
-                <Link href="/room/register/building">
-                  <a
-                    role="presentation"
-                    onClick={() => setIsUsermenuOpened(false)}
-                  >
-                    숙소 등록하기
-                  </a>
-                </Link>
-              </li>
+              <li>숙소 등록하기</li>
               <div className="header-usermenu-divider" />
-              <li role="presentation" onClick={() => {}}>
+              <li role="presentation" onClick={logout}>
                 로그아웃
               </li>
             </ul>
