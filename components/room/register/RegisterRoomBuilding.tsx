@@ -104,42 +104,46 @@ const RegisterRoomBuilding: React.FC = () => {
   const detailBuildingOptions = useMemo(() => {
     switch (largeBuildingType) {
       case "아파트": {
-        const { apartmentBuildingTypeList } = require("../../lib/staticDate");
+        const {
+          apartmentBuildingTypeList,
+        } = require("../../../lib/staticDate");
         dispatch(
           registerRoomActions.setBuildingType(apartmentBuildingTypeList[0])
         );
         return apartmentBuildingTypeList;
       }
       case "주택": {
-        const { houstBuildingTypeList } = require("../../lib/staticDate");
+        const { houstBuildingTypeList } = require("../../../lib/staticDate");
         dispatch(registerRoomActions.setBuildingType(houstBuildingTypeList[0]));
         return houstBuildingTypeList;
       }
       case "별채": {
         const {
           secondaryUnitBuildingTypeList,
-        } = require("../../lib/staticDate");
+        } = require("../../../lib/staticDate");
         dispatch(
           registerRoomActions.setBuildingType(secondaryUnitBuildingTypeList[0])
         );
         return secondaryUnitBuildingTypeList;
       }
       case "독특한 숙소": {
-        const { uniqueSpaceBuildingTypeList } = require("../../lib/staticDate");
+        const {
+          uniqueSpaceBuildingTypeList,
+        } = require("../../../lib/staticDate");
         dispatch(
           registerRoomActions.setBuildingType(uniqueSpaceBuildingTypeList[0])
         );
         return uniqueSpaceBuildingTypeList;
       }
       case "B&B": {
-        const { bnbBuildingTypeList } = require("../../lib/staticDate");
+        const { bnbBuildingTypeList } = require("../../../lib/staticDate");
         dispatch(registerRoomActions.setBuildingType(bnbBuildingTypeList[0]));
         return bnbBuildingTypeList;
       }
       case "부티크호텔": {
         const {
           boutiquesHotelBuildingTypeList,
-        } = require("../../lib/staticDate");
+        } = require("../../../lib/staticDate");
         dispatch(
           registerRoomActions.setBuildingType(boutiquesHotelBuildingTypeList[0])
         );
