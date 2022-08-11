@@ -18,6 +18,7 @@ import OpenedEyeIcon from "../../public/static/svg/auth/opened_eye.svg";
 import ClosedEyeIcon from "../../public/static/svg/auth/closed_eye.svg";
 import useValidateMode from "hooks/useValidateMode";
 import PasswordWarnning from "./PasswordWarnning";
+import { authActions } from "store/auth";
 
 const Container = styled.form`
   width: 568px;
@@ -227,6 +228,11 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
     };
   }, []);
 
+  //* 로그인 모달로 변경하기
+  const changeToLoginModal = () => {
+    dispatch(authActions.setAuthMode("login"));
+  };
+
   return (
     <Container onSubmit={onSubmitSignUp}>
       <CloseXIcon className="modal-close-x-icon" onClick={closeModal} />
@@ -349,7 +355,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <span
           className="sign-up-modal-set-login"
           role="presentation"
-          onClick={() => {}}
+          onClick={changeToLoginModal}
         >
           로그인
         </span>
