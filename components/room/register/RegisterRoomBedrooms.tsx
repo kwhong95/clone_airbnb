@@ -1,3 +1,4 @@
+import Button from "components/common/Button";
 import Counter from "components/common/Counter";
 import Selector from "components/common/Selector";
 import { bedroomCountList } from "lib/staticDate";
@@ -8,6 +9,7 @@ import { useSelector } from "store";
 import { registerRoomActions } from "store/registerRoom";
 import styled from "styled-components";
 import palette from "styles/palette";
+import RegisterRoomBedTypes from "./RegisterRoomBedTypes";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -20,6 +22,9 @@ const Container = styled.div`
     font-weight: bold;
     color: ${palette.gray_76};
     margin-bottom: 6px;
+  }
+  h4 {
+    font-size: 24px;
   }
   .room-register-step-info {
     font-size: 14px;
@@ -40,6 +45,19 @@ const Container = styled.div`
     width: 320px;
     margin-bottom: 57px;
   }
+  .register-room-bed-type-info {
+    margin-top: 6px;
+    margin-bottom: 20px;
+    max-width: 400px;
+    word-break: keep-all;
+  }
+  .register-room-bed-type-list-wrapper {
+    width: 548px;
+  }
+
+  .register-room-bed-type-bedroom-texts {
+    margin-bottom: 28px;
+  }
 `;
 
 const RegisterRoomBedrooms: React.FC = () => {
@@ -48,6 +66,8 @@ const RegisterRoomBedrooms: React.FC = () => {
   );
   const bedroomCount = useSelector((state) => state.registerRoom.bedroomCount);
   const bedCount = useSelector((state) => state.registerRoom.bedCount);
+  const bedList = useSelector((state) => state.registerRoom.bedList);
+
   const dispatch = useDispatch();
 
   //* 최대 숙박 인원 변경 시
@@ -91,6 +111,16 @@ const RegisterRoomBedrooms: React.FC = () => {
       <div className="register-room-bed-count-wrapper">
         <Counter label="침대" value={bedCount} onChange={onChangeBedCount} />
       </div>
+      <h4>침대 유형</h4>
+      <p className="register-room-bed-type-info">
+        각 침실에 놓인 침대 유형을 명시하면 숙소에 침대가 어떻게 구비되어 있는지
+        게스트가 잘 파악할 수 있습니다.
+      </p>
+      <ul className="register-room-bed-type-list-wrapper">
+        {bedList.map((bedroom) => (
+          <RegisterRoomBedTypes bedroom={bedroom} />
+        ))}
+      </ul>
     </Container>
   );
 };
