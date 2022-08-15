@@ -37,7 +37,7 @@ const Container = styled.footer`
 interface IProps {
   prevHref?: string;
   nextHref?: string;
-  isValid: boolean;
+  isValid?: boolean;
 }
 
 const RegisterRoomFooter: React.FC<IProps> = ({
