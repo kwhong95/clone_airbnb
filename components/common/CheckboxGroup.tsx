@@ -69,7 +69,7 @@ const Container = styled.div`
     border: 0;
     border-radius: 2px;
     position: absolute;
-    background-image: url("/static/svg/checkbox/checkbox/checkbox_mark.svg");
+    background-image: url("/static/svg/checkbox/checkbox_mark.svg");
     background-repeat: no-repeat;
     background-position: center;
   }
