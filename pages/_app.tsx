@@ -22,7 +22,6 @@ app.getInitialProps = async (context: AppContext) => {
   const cookieObject = cookieStringToObject(context.ctx.req?.headers.cookie);
   const { store } = context.ctx;
   const { isLogged } = store.getState().user;
-  console.log(cookieObject);
 
   try {
     if (!isLogged && cookieObject.access_token) {
