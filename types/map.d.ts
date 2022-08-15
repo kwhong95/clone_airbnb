@@ -8,3 +8,4 @@ declare global {
 }
 
 declare module "lodash/throttle";
+declare module "lodash/isEmpty";

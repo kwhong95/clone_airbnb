@@ -52,7 +52,7 @@ const RegisterRoomConveniences = () => {
       </div>
       <RegisterRoomFooter
         prevHref="/room/register/amentities"
-        nextHref="/room/register/phoro"
+        nextHref="/room/register/photo"
       />
     </Container>
   );
