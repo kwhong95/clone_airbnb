@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import ReactDatePicker, { ReactDatePickerProps } from "react-datepicker";
+import ko from "date-fns/locale/ko";
 import "react-datepicker/dist/react-datepicker.css";
 import palette from "styles/palette";
+import { addHours } from "date-fns";
 
 const Container = styled.div`
   width: 100%;
@@ -104,10 +106,22 @@ const Container = styled.div`
   }
 `;
 
-const DatePicker: React.FC<ReactDatePickerProps> = ({ ...props }) => {
+const DatePicker: React.FC<ReactDatePickerProps> = ({ onChange, ...props }) => {
   return (
     <Container>
-      <ReactDatePicker {...props} disabledKeyboardNavigation />
+      <ReactDatePicker
+        {...props}
+        dateFormat="MM일 dd일"
+        disabledKeyboardNavigation
+        locale={ko}
+        onChange={(date, event) => {
+          if (date) {
+            onChange(addHours(date as Date, 9), event);
+          } else {
+            onChange(null, event);
+          }
+        }}
+      />
     </Container>
   );
 };
