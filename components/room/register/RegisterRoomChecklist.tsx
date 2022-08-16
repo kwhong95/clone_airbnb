@@ -3,6 +3,8 @@ import styled from "styled-components";
 import isEmpty from "lodash/isEmpty";
 import { useSelector } from "store";
 import RegisterRoomCheckStep from "./RegisterRoomCheckStep";
+import RegisterRoomSubmitFooter from "./RegisterRoomSubmitFooter";
+import RegisterRoomFooter from "./RegisterRoomFooter";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -269,6 +271,14 @@ const RegisterRoomChecklist = () => {
           inProgress={stepInProgress === "date"}
         />
       </ul>
+      {isDateActived ? (
+        <RegisterRoomSubmitFooter />
+      ) : (
+        <RegisterRoomFooter
+          prevHref="/room/register/date"
+          nextHref={`/room/register/${stepInProgress}`}
+        />
+      )}
     </Container>
   );
 };
