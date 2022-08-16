@@ -6,6 +6,7 @@ import { registerRoomActions } from "store/registerRoom";
 import styled from "styled-components";
 
 import palette from "styles/palette";
+import RegisterRoomFooter from "./RegisterRoomFooter";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -15,6 +16,7 @@ const Container = styled.div`
     margin-bottom: 56px;
   }
   h3 {
+    font-size: 14px;
     font-weight: bold;
     color: ${palette.gray_76};
     margin-bottom: 6px;
@@ -38,10 +40,10 @@ const Container = styled.div`
       border-radius: 4px;
       font-size: 16px;
       outline: none;
-      &::placeholder {
+      & ::placeholder {
         color: ${palette.gray_76};
       }
-      &:focus {
+      & :focus {
         border-color: ${palette.dark_cyan};
       }
     }
@@ -54,6 +56,8 @@ const Container = styled.div`
 const RegisterRoomDate = () => {
   const startDate = useSelector((state) => state.registerRoom.startDate);
   const endDate = useSelector((state) => state.registerRoom.endDate);
+  const dateStartDate = startDate ? new Date(startDate) : null;
+  const dateEndDate = endDate ? new Date(endDate) : null;
 
   const dispatch = useDispatch();
 
@@ -80,8 +84,13 @@ const RegisterRoomDate = () => {
           <label>
             <span>예약 시작일</span>
             <DatePicker
-              selected={startDate ? new Date(startDate) : null}
+              selected={dateStartDate}
               onChange={onChangeStartDate}
+              monthsShown={2}
+              selectsStart
+              startDate={dateStartDate}
+              endDate={dateEndDate}
+              minDate={new Date()}
             />
           </label>
         </div>
@@ -89,12 +98,21 @@ const RegisterRoomDate = () => {
           <label>
             <span>예약 마감일</span>
             <DatePicker
-              selected={endDate ? new Date(endDate) : null}
+              selected={dateEndDate}
               onChange={onChangeEndDate}
+              monthsShown={2}
+              selectsEnd
+              startDate={dateStartDate}
+              endDate={dateEndDate}
+              minDate={new Date()}
             />
           </label>
         </div>
       </div>
+      <RegisterRoomFooter
+        prevHref="/room/register/price"
+        nextHref="/room/register/checklist"
+      />
     </Container>
   );
 };

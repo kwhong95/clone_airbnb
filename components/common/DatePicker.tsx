@@ -37,6 +37,7 @@ const Container = styled.div`
   .react-datepicker__navigation--next {
     top: 40px;
     right: 56px;
+    border: 0;
   }
   .react-datepicker__current-month {
     font-size: 16px;
@@ -57,6 +58,9 @@ const Container = styled.div`
   .react-datepicker__month {
     margin: 0;
   }
+  .react-datepicker__week {
+    display: flex;
+  }
   .react-datepicker__day {
     width: 48px;
     height: 48px;
@@ -76,16 +80,22 @@ const Container = styled.div`
       border-radius: 50%;
     }
   }
+
   .react-datepicker__day--in-range {
     background-color: ${palette.gray_f7};
   }
   .react-datepicker__day--in-selecting-range {
     background-color: ${palette.gray_f7};
   }
-  .react-datepicker__day-selected {
+  .react-datepicker__day--selected {
     background-color: ${palette.black};
     color: white;
     border-radius: 50%;
+    &:hover {
+      background-color: ${palette.black};
+
+      color: white;
+    }
   }
   .react-datepicker__day--range-start {
     background-color: ${palette.black};
@@ -97,7 +107,7 @@ const Container = styled.div`
     color: white;
     border-radius: 50%;
   }
-  .react-datepicker__day-disabled {
+  .react-datepicker__day--disabled {
     color: ${palette.gray_dd};
     cursor: no-drop;
     &:hover {
