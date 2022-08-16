@@ -169,74 +169,92 @@ const registerRoom = createSlice({
     //* 욕실 개수 변경하기
     setBathroomCount(state, action: PayloadAction<number>) {
       state.bathroomCount = action.payload;
+      return state;
     },
     //* 욕실 유형 변경하기
     setBathroomType(state, action: PayloadAction<"private" | "public">) {
       state.bathroomType = action.payload;
+      return state;
     },
     //* 국가 변경하기
     setCountry(state, action: PayloadAction<string>) {
       state.country = action.payload;
+      return state;
     },
     //* 시/도 변경하기
     setCity(state, action: PayloadAction<string>) {
       state.city = action.payload;
+      return state;
     },
     //* 시/군/구 변경하기
     setDistrict(state, action: PayloadAction<string>) {
       state.district = action.payload;
+      return state;
     },
     //* 도로명주소 변경하기
     setStreetAddress(state, action: PayloadAction<string>) {
       state.streetAddress = action.payload;
+      return state;
     },
     //* 동호수 변경하기
     setDetailAddress(state, action: PayloadAction<string>) {
       state.detailAddress = action.payload;
+      return state;
     },
     //* 우편번호 변경하기
     setPostcode(state, action: PayloadAction<string>) {
       state.postcode = action.payload;
+      return state;
     },
     //* 위도 변경하기
     setLatitude(state, action: PayloadAction<number>) {
       state.latitude = action.payload;
+      return state;
     },
     //* 경도 변경하기
     setLongitude(state, action: PayloadAction<number>) {
       state.longitude = action.payload;
+      return state;
     },
     //* 편의 시설 변경하기
     setAmentities(state, action: PayloadAction<string[]>) {
       state.amentities = action.payload;
+      return state;
     },
     //* 편의 공간 변경하기
     setConveniences(state, action: PayloadAction<string[]>) {
       state.conveniences = action.payload;
+      return state;
     },
     //* 숙소 사진 변경하기
     setPhotos(state, action: PayloadAction<string[]>) {
       state.photos = action.payload;
+      return state;
     },
     //* 숙소 설명 변경하기
     setDescription(state, action: PayloadAction<string>) {
       state.description = action.payload;
+      return state;
     },
     //* 숙소 제목 변경하기
     setTitle(state, action: PayloadAction<string>) {
       state.title = action.payload;
+      return state;
     },
     //* 숙소 요금 변경하기
     setPrice(state, action: PayloadAction<number>) {
       state.price = action.payload;
+      return state;
     },
     //* 예약 시작 날짜 변경하기
     setStartDate(state, action: PayloadAction<string | null>) {
       state.startDate = action.payload;
+      return state;
     },
     //* 예약 시작 날짜 변경하기
     setEndDate(state, action: PayloadAction<string | null>) {
       state.endDate = action.payload;
+      return state;
     },
   },
 });
