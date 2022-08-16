@@ -54,11 +54,12 @@ const RegisterRoomSubmitFooter = () => {
 
   return (
     <Container>
-      <Link href="/room/register/date" />
-      <a className="register-room-footer-back">
-        <BackArrowIcon />
-        뒤로
-      </a>
+      <Link href="/room/register/date">
+        <a className="register-room-footer-back">
+          <BackArrowIcon />
+          뒤로
+        </a>
+      </Link>
       <Button onClick={onClickRegisterRoom} color="bittersweet" width="102px">
         등록하기
       </Button>

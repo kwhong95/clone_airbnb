@@ -41,7 +41,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         !largeBuildingType ||
         !buildingType ||
         !roomType ||
-        isSetUpForGuest ||
+        !isSetUpForGuest ||
         !maximumGuestCount ||
         !bedroomCount ||
         !bedCount ||
