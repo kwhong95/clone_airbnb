@@ -53,7 +53,7 @@ const RegisterRoomPrice = () => {
       />
       <RegisterRoomFooter
         prevHref="/room/register/title"
-        nextHref="/room/register/data"
+        nextHref="/room/register/date"
       />
     </Container>
   );
