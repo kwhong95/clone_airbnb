@@ -29,7 +29,7 @@ const Container = styled.div<InputContainerProps>`
     ::placeholder {
       color: ${paltette.gray_76};
     }
-    & :focus {
+    &:focus {
       border-color: ${paltette.dark_cyan};
     }
   }
@@ -53,7 +53,7 @@ const Container = styled.div<InputContainerProps>`
         background-color: ${paltette.snow};
         border-color: ${paltette.orange};
 
-        & :focus {
+        &:focus {
           border-color: ${paltette.orange};
         }
       }

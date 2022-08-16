@@ -53,7 +53,7 @@ const Container = styled.button<StyledButtonProps>`
   padding: 0 15px;
   border: 0;
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   outline: none;
   cursor: pointer;
