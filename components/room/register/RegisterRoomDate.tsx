@@ -1,5 +1,7 @@
+import DatePicker from "components/common/DatePicker";
 import React from "react";
 import styled from "styled-components";
+
 import palette from "styles/palette";
 
 const Container = styled.div`
@@ -21,6 +23,7 @@ const RegisterRoomDate = () => {
     <Container>
       <h2>예약 가능 여부 설정하기</h2>
       <h3>11단계</h3>
+      <DatePicker onChange={(date) => console.log(date)} />
     </Container>
   );
 };
