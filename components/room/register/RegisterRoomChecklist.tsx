@@ -154,7 +154,7 @@ const RegisterRoomChecklist = () => {
   //* 예약 날짜가 채워져 있는지
   const isDateActived = useMemo(() => {
     const { startDate, endDate } = registerRoom;
-    if (!isPriceActived || startDate || endDate) {
+    if (!isPriceActived || !startDate || !endDate) {
       return false;
     }
     return true;
