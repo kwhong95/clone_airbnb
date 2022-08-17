@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { useSelector } from "store";
 import { format } from "date-fns";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import palette from "styles/palette";
 import MapIcon from "../../../public/static/svg/room/main/map.svg";
 import RoomList from "./RoomList";
 
-const Container = styled.div`
+const RoomListMap = dynamic(() => import("./RoomListMap"), { ssr: false });
+
+const Container = styled.div<{ showMap: boolean }>`
   padding: 50px 80px;
   .room-list-info {
     margin-bottom: 8px;
@@ -56,6 +59,17 @@ const Container = styled.div`
       }
     }
   }
+
+  ${({ showMap }) =>
+    showMap &&
+    css`
+      width: 840px;
+      padding: 50px 24px;
+      margin: 0;
+    `}
+  .flex {
+    display: flex;
+  }
 `;
 
 const RoomMain: React.FC = () => {
@@ -78,7 +92,7 @@ const RoomMain: React.FC = () => {
   console.log(rooms);
 
   return (
-    <Container>
+    <Container showMap={showMap}>
       <p className="room-list-info">{getRoomListInfo}</p>
       <h1 className="room-list-title">숙소</h1>
       <div className="room-list-buttons">
@@ -86,18 +100,21 @@ const RoomMain: React.FC = () => {
           <button type="button">숙소 유형</button>
           <button type="button">요금</button>
         </div>
-        <button
-          type="button"
-          className="room-list-show-map-button"
-          onClick={() => {
-            setShowMap(!showMap);
-          }}
-        >
-          <MapIcon /> 지도 표시하기
-        </button>
+        {!showMap && (
+          <button
+            type="button"
+            className="room-list-show-map-button"
+            onClick={() => {
+              setShowMap(!showMap);
+            }}
+          >
+            <MapIcon /> 지도 표시하기
+          </button>
+        )}
       </div>
       <div className="room-list-wrapper">
-        <RoomList />
+        <RoomList showMap={showMap} />
+        {showMap && <RoomListMap showMap={showMap} setShowMap={setShowMap} />}
       </div>
     </Container>
   );

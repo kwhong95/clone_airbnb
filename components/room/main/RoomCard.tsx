@@ -132,7 +132,7 @@ const Container = styled.li<{ showMap: boolean }>`
 
 interface IProps {
   room: RoomType;
-  showMap?: boolean;
+  showMap: boolean;
 }
 
 const RoomCard: React.FC<IProps> = ({ room, showMap }) => {
