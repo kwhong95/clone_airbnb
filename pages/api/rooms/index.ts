@@ -97,6 +97,40 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.send(e);
     }
   }
+
+  if (req.method === "GET") {
+    const {
+      checkInDate,
+      checkOutDate,
+      adultCount,
+      childrenCount,
+      latitude,
+      longitude,
+      limit,
+      page = "1",
+    } = req.query;
+    try {
+      const rooms = Data.room.getLists();
+
+      //* 개수 자르기
+      const limitedRooms = rooms.splice(
+        0 + (Number(page) - 1) * Number(limit),
+        Number(limit)
+      );
+      //* host 정보 넣기
+      const roomWithHost = await Promise.all(
+        limitedRooms.map(async (room) => {
+          const host = Data.user.find({ id: room.hostId });
+          return { ...room, host };
+        })
+      );
+      res.statusCode = 200;
+      return res.send(roomWithHost);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   res.statusCode = 405;
 
   return res.end();
