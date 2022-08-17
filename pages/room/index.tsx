@@ -2,10 +2,11 @@ import React from "react";
 import { NextPage } from "next";
 import RoomMain from "components/room/main/RoomMain";
 import { getRoomListAPI } from "lib/api/room";
+import { roomActions } from "store/room";
 
 const index: NextPage = () => <RoomMain />;
 
-index.getInitialProps = async ({ store, query }) => {
+index.getInitialProps = async ({ store, query }: any) => {
   const {
     checkInDate,
     checkOutDate,
@@ -32,7 +33,7 @@ index.getInitialProps = async ({ store, query }) => {
         ? encodeURI(query.location as string)
         : undefined,
     });
-    store.dispatch();
+    store.dispatch(roomActions.setRooms(data));
   } catch (e) {
     console.log(e);
   }
